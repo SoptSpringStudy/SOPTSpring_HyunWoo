@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="tWalk" class="TransportationWalk" />
+    <bean id="myCalc" class="Calculator">
+        <property name="firstNum">
+            <value>2015</value>
+        </property>
+        <property name="secondNum">
+            <value>2016</value>
+        </property>
+    </bean>
+    <bean id="myAnimal" class="MessageAnimal">
+        <property name="name">
+            <value>강아지</value>
+        </property>
+        <property name="bow">
+            <value>멍멍</value>
+        </property>
+    </bean>
+    <bean id="myIntro" class="Introduce">
+        <property name="name">
+            <value>이현우</value>
+        </property>
+        <property name="age">
+            <value>24</value>
+        </property>
+        <property name="soptDept">
+            <value>Android</value>
+        </property>
+        <property name="friends">
+            <list>
+                <value>최호준</value>
+                <value>김윤준</value>
+                <value>이주은</value>
+            </list>
+        </property>
+        <property name="proLangs">
+            <map>
+                <entry>
+                    <key>
+                        <value>C언어</value>
+                    </key>
+                    <value>반년</value>
+                </entry>
+                <entry>
+                    <key>
+                        <value>Java</value>
+                    </key>
+                    <value>반년</value>
+                </entry>
+                <entry>
+                    <key>
+                        <value>C++</value>
+                    </key>
+                    <value>1년</value>
+                </entry>
+                <entry>
+                    <key>
+                        <value>Python</value>
+                    </key>
+                    <value>3개월</value>
+                </entry>
+                <entry>
+                    <key>
+                        <value>Kotlin</value>
+                    </key>
+                    <value>1개월</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+</beans>
