@@ -47,3 +47,8 @@ GenericXmlApplicationContext ctx = new GenericXmlApplicationContext(arguments);
 xml 파일 내의 ```bean```태그 내 ```scope``` 설정을 ```scope = "prototype"```으로 하면
 싱글톤 패턴과는 달리 ```getBean()```을 호출할 시 일반적인 Java 인스턴스를 생성하는 것과 마찬가지로
 여러번 생성자가 호출됨
+
+### 의존객체 자동 주입
+의존 대상 객체를 명시하지 않아도 컨테이너가 자동으로 필요한 대상 객체를 찾아 객체를 주입시켜주는 기능
++ @Autowired
+주입하려고 하는 객체의 타입이 일치하는 객체를 자동으로 주입한다
