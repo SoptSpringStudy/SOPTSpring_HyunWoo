@@ -82,3 +82,23 @@ eg) 동일한 타입의 객체가 다수 정의되어 있을 때 예외가 발�
 @Autowired 속성과 동일하다고 생각하면 됨
 @Named(value = “아이디”): value 값에 bean의 id를 적으면 해당 객체를 주입한다
 
+## 3주차 스터디
+### 스프링 컨테이너 생명주기
+#### 스프링 컨테이너 생성
+```GenericXmlApplicationCotext xml = new GenericXmlApplicationCotext(“classpath: ~.xml”);```
+컨테이너 생성 시점과 빈 객체의 생성시점(의존관계 형성)은 동일
+
+#### 스프링 컨테이너 소멸
+```ctx.close()```
+메모리에서 해제, 내부 Bean 객체들도 소멸
+
+### Bean 객체 생명주기
+Bean 객체의 생명주기는 컨테이너의 생명주기와 같이 한다. 즉 스프링 컨테이너가 생성될 시 빈이 생성되고 소멸될 시 같이 소멸된다.
+
+인터페이스 InitializingBean, DisposableBean들을 통해 afterPropertiesSet, destroy 메서드를 구현할 수 있고 Bean 객체를 생성할 때 어떠한 로직을 처리하고 싶으면 afterPropertiesSet, 소멸될 때 처리하고 싶으면 destroy를 구현해서 사용하면 된다.
+
+DB 연결을 위한 id, pw 인증 등의 작업을 이 때 처리
+
+### init-method, destroy-method 속성
+```<bean init-method = “생성시점 호출함수 이름” destroy-method = “소멸시점 호출함수”>```
+InitializingBean, DisposableBean 구현하는 것과 동일한 기능
