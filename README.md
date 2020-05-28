@@ -102,3 +102,86 @@ DB 연결을 위한 id, pw 인증 등의 작업을 이 때 처리
 ### init-method, destroy-method 속성
 ```<bean init-method = “생성시점 호출함수 이름” destroy-method = “소멸시점 호출함수”>```
 InitializingBean, DisposableBean 구현하는 것과 동일한 기능
+
+### XML 파일 대신 Java 파일을 이용해서 Bean을 제작하자!
+Motivation) 여태까지 XML 파일을 이용해서 객체를 생성했는데 그보다 더 직관적으로(개발자스럽게) 객체를 만들어볼 수 있지 않을까?
+스프링: 그런 당신을 위해 준비했습니다
+
+#### @Congiguration 어노테이션 클래스
+```@Configuration```은 클래스 상단에 작성하여 해당 클래스가 외부 설정 클래스임을 확인시킨다.
+```
+@Configuration
+public class MemberConfig(){
+}
+```
+
+#### 일반적인 싱글턴 객체 생성
+```@Bean```어노테이션을 활용해서 Bean 생성, 생성 메서드의 이름은 xml bean 태그에서 id 역할
+```
+@Bean
+public ClassName className(){
+       return new ClassName();
+}
+```
+
+#### [심화] 만약 싱글턴으로 객체를 생성하고 싶지 않다면?
+```@Scope``` 어노테이션을 사용하여 해당 Bean의 범위를 제어할 수 있다
+```
+@Bean
+@Scope(value = "prototype")
+public ClassName className(){
+       return new ClassName();
+}
+```
+
+위와 같이 생성한다면 일반 Java 객체처럼 Bean을 생성할 수 있다.
+
+#### DI by Constructor, Setter
++ 생성자 주입 방법
+```
+@Bean
+public ClassName service(){
+       return new ClassName(new ClassName2());
+}
+```
+
++ Setter 주입 방법
+```
+@Bean
+public ClassName infoDev(){
+       ClassName info = new ClassName();
+       info.setInfo("~");
+       return info;
+}
+```
+
+클래스 내부에서 객체를 생성하고 Setter로 멤버 변수 값을 설정하고 객체를 반환한다
+
++ List, Map 타입 Setter로 주입
+```
+public ClassName service(){
+ClassName info = new ClassName();
+ArrayList<T> property = new ArrayList<T>();
+	property.add(“A”);
+	property.add(“B”);
+	property.add(“C”);
+	info.setProperty(property);
+
+	Map<T1, T2> property = new HashMap<T1, T2>();
+	property.put(“A”, “Answer”);
+	property.put(“B”, “Bnswer”);
+	info.setProperty(property);
+	
+	return info;
+}
+```
+
+#### @Configuration 클래스를 이용한 Application Context 제작
+XML 파일을 이용할 때는 ```GenericXmlApplicationContext``` 클래스를 활용했다면, 어노테이션 클래스를 활용할 때는 ```AnnotationConfigurationApplicationContext```를 활용한다
+
+```
+AnnotationConfigurationApplicationContext ctx = 
+new AnnotationConfigurationApplicationContext(“Classname.class”);
+```
+
+이외에는 
