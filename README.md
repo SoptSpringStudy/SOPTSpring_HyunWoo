@@ -177,11 +177,11 @@ ArrayList<T> property = new ArrayList<T>();
 ```
 
 #### @Configuration 클래스를 이용한 Application Context 제작
-XML 파일을 이용할 때는 ```GenericXmlApplicationContext``` 클래스를 활용했다면, 어노테이션 클래스를 활용할 때는 ```AnnotationConfigurationApplicationContext```를 활용한다
+XML 파일을 이용할 때는 ```GenericXmlApplicationContext``` 클래스를 활용했다면, 어노테이션 클래스를 활용할 때는 ```AnnotationConfigApplicationContext```를 활용한다
 
 ```
-AnnotationConfigurationApplicationContext ctx = 
-new AnnotationConfigurationApplicationContext(“Classname.class”);
+AnnotationConfigApplicationContext ctx = 
+new AnnotationConfigApplicationContext(Classname.class);
 ```
 
 #### 기능에 따라서 파일을 분리하고 한 파일에 다른 xml을 불러온다: @Import 어노테이션
