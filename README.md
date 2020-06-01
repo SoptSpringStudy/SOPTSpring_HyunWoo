@@ -184,4 +184,19 @@ AnnotationConfigurationApplicationContext ctx =
 new AnnotationConfigurationApplicationContext(“Classname.class”);
 ```
 
-이외에는 
+#### 기능에 따라서 파일을 분리하고 한 파일에 다른 xml을 불러온다: @Import 어노테이션
+```@Import``` 어노테이션을 활용하여 다른 xml의 정의를 활용할 수 있다.
+
+```
+@Configuration
+@Improt(ClassName.class)
+public class ClassName{
+	@Autowired
+	Property property;
+
+	@Bean
+	public Service service(){
+		return new Service();
+	}
+}
+```
